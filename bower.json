@@ -1,0 +1,16 @@
+{
+  "name": "adapt-contrib-textNotify",
+  "version": "0.0.1",
+  "framework": "^2.0.0",
+  "homepage": "",
+  "issues": "",
+  "displayName" : "Text Notify",
+  "component" : "textNotify",
+  "description": "A text component which hijacks anchor tag clicks to show a notify",
+  "main": "/js/adapt-contrib-textNotify.js",
+  "keywords": [
+    "adapt-plugin",
+    "adapt-component"
+  ],
+  "license": "GPLv3"
+}
