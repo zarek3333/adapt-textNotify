@@ -37,8 +37,7 @@
       "properties":{
         "test": {
           "type":"object",
-          "required":true,
-          "legend": " ",
+          "title": "Popup",
           "properties":{
             "title": {
               "type":"string",
