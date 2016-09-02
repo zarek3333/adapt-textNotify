@@ -1,0 +1,66 @@
+{
+  "type":"object",
+  "$schema": "http://json-schema.org/draft-04/schema",
+  "id": "http://jsonschema.net",
+  "$ref": "http://localhost/plugins/content/component/model.schema",
+  "globals": {
+    "ariaRegion": {
+      "type": "string",
+      "required": true,
+      "default": "",
+      "inputType": "Text",
+      "validators": [],
+      "translatable": true
+    }
+  },
+  "properties":{
+    "_supportedLayout": {
+      "type": "string",
+      "required": true,
+      "enum": ["full-width", "half-width", "both"],
+      "default": "both",
+      "editorOnly": true
+    },
+    "instruction": {
+      "type": "string",
+      "required": false,
+      "default": "",
+      "inputType": "Text",
+      "validators": [],
+      "help": "This is the instruction text",
+      "translatable": true
+    },
+    "_popupData": {
+      "type":"object",
+      "required":true,
+      "legend": "Notify Popup Text",
+      "properties":{
+        "test": {
+          "type":"object",
+          "required":true,
+          "legend": " ",
+          "properties":{
+            "title": {
+              "type":"string",
+              "required":true,
+              "title": "Title",
+              "default": "Title goes here",
+              "inputType": "Text",
+              "validators": ["required"],
+              "help": "Title for the Popup Notify Window"
+            },
+            "message": {
+              "type":"string",
+              "required":true,
+              "title": "Message Body",
+              "default": "Message goes here",
+              "inputType": "Text",
+              "validators": ["required"],
+              "help": "Message body text for the Popup Notify Window"
+            }
+          }
+        }
+      }
+    }
+  }
+}
