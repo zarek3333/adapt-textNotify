@@ -30,14 +30,24 @@
       "help": "This is the instruction text",
       "translatable": true
     },
+    "_notifyopt": {
+      "type": "string",
+      "required": true,
+      "enum": ["popup", "alert"],
+      "inputType": {"type": "Select", "options": ["popup", "alert"]},
+      "title": "set if you want to use a popup window or an alert window",
+      "default": "popup",
+      "validators": ["required"],
+      "help": "choose a 'popup window' or 'alert window'"
+    },
     "_popupData": {
       "type":"object",
-      "required":true,
+      "required":false,
       "legend": "Notify Popup Text",
       "properties":{
-        "test": {
+        "mypopup": {
           "type":"object",
-          "title": "Popup",
+          "title": "Popup Window",
           "properties":{
             "title": {
               "type":"string",
@@ -45,7 +55,6 @@
               "title": "Title",
               "default": "Title goes here",
               "inputType": "Text",
-              "validators": ["required"],
               "help": "Title for the Popup Notify Window"
             },
             "message": {
@@ -54,8 +63,44 @@
               "title": "Message Body",
               "default": "Message goes here",
               "inputType": "Text",
-              "validators": ["required"],
               "help": "Message body text for the Popup Notify Window"
+            }
+          }
+        }
+      }
+    },
+    "_alertData": {
+      "type":"object",
+      "required":false,
+      "legend": "Notify Alert Text",
+      "properties":{
+        "myalert": {
+          "type":"object",
+          "title": "Alert Window",
+          "properties":{
+            "title": {
+              "type":"string",
+              "required":true,
+              "title": "Title",
+              "default": "Title goes here",
+              "inputType": "Text",
+              "help": "Title for the Alert Notify Window"
+            },
+            "message": {
+              "type":"string",
+              "required":true,
+              "title": "Message Body",
+              "default": "Message goes here",
+              "inputType": "Text",
+              "help": "Message body text for the Alert Notify Window"
+            },
+            "confirmButton": {
+              "type":"string",
+              "required":true,
+              "title": "Confirm Button Text",
+              "default": "Continue",
+              "inputType": "Text",
+              "help": "Text displayed inside the confirmation button"
             }
           }
         }
