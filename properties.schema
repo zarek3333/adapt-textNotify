@@ -32,7 +32,7 @@
     },
     "_graphic": {
       "type":"object",
-      "required":true,
+      "required":false,
       "title": "Graphic",
       "properties":{
         "alt": {
@@ -47,18 +47,18 @@
         },
         "large": {
           "type":"string",
-          "required":true,
+          "required":false,
           "default": "",
           "inputType": "Asset:image",
-          "validators": ["required"],
+          "validators": [],
           "help": "The large sized image for desktop devices"
         },
         "small": {
           "type":"string",
-          "required":true,
+          "required":false,
           "default": "",
           "inputType": "Asset:image",
-          "validators": ["required"],
+          "validators": [],
           "help": "The small sized image for mobile devices"
         },
         "attribution": {
