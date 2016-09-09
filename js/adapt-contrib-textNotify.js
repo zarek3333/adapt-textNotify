@@ -1,24 +1,79 @@
 define(function(require) {
+    
+    var ComponentView = require('coreViews/componentView');
     var Adapt = require('coreJS/adapt');
-    var Text = require('components/adapt-contrib-text/js/adapt-contrib-text');
 
-    var TextNotify = Text.extend({
+    var TextNotify = ComponentView.extend({
 
         template: "text",
+        preRender: function() {
+            this.listenTo(Adapt, 'device:changed', this.resizeImage);
+
+            // Checks to see if the graphic should be reset on revisit
+            this.checkIfResetOnRevisit();
+        },
+
         postRender: function() {
-            Text.prototype.postRender.apply(this);
+            this.resizeImage(Adapt.device.screenSize, true);
+
+            ComponentView.prototype.postRender.apply(this);
             $('.component-body-inner a', this.$el).click(_.bind(this.onAnchorClicked, this));
             $('.component-body-inner button', this.$el).click(_.bind(this.onAnchorClicked, this));
         },
 
+        // Used to check if the graphic should reset on revisit
+        checkIfResetOnRevisit: function() {
+            var isResetOnRevisit = this.model.get('_isResetOnRevisit');
+
+            // If reset is enabled set defaults
+            if (isResetOnRevisit) {
+                this.model.reset(isResetOnRevisit);
+            }
+        },
+
+        inview: function(event, visible, visiblePartX, visiblePartY) {
+            if (visible) {
+                if (visiblePartY === 'top') {
+                    this._isVisibleTop = true;
+                } else if (visiblePartY === 'bottom') {
+                    this._isVisibleBottom = true;
+                } else {
+                    this._isVisibleTop = true;
+                    this._isVisibleBottom = true;
+                }
+
+                if (this._isVisibleTop && this._isVisibleBottom) {
+                    this.$('.component-widget').off('inview');
+                    this.setCompletionStatus();
+                }
+
+            }
+        },
+
         remove: function() {
+            // Remove any 'inview' listener attached.
+            this.$('.component-widget').off('inview');
+
+            ComponentView.prototype.remove.apply(this, arguments);
+
             // danger! will remove all events on '.component-body-inner a'
             $('.component-body-inner a', this.$el).off( "click" );
             $('.component-body-inner button', this.$el).off( "click" );
         },
 
-        inview: function(event, visible, visiblePartX, visiblePartY) {
-            // do nothing to avoid completion status being set
+        resizeImage: function(width, setupInView) {
+            var imageWidth = width === 'medium' ? 'small' : width;
+            var imageSrc = (this.model.get('_graphic')) ? this.model.get('_graphic')[imageWidth] : '';
+            this.$('.graphic-widget img').attr('src', imageSrc);
+
+            this.$('.graphic-widget').imageready(_.bind(function() {
+                this.setReadyStatus();
+
+                if (setupInView) {
+                    // Bind 'inview' once the image is ready.
+                    this.$('.component-widget').on('inview', _.bind(this.inview, this));
+                }
+            }, this));
         },
 
         onAnchorClicked: function(event) {

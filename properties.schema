@@ -30,6 +30,48 @@
       "help": "This is the instruction text",
       "translatable": true
     },
+    "_graphic": {
+      "type":"object",
+      "required":true,
+      "title": "Graphic",
+      "properties":{
+        "alt": {
+          "type":"string",
+          "required":false,
+          "default": "",
+          "title": "Alternative Text",
+          "inputType": "Text",
+          "validators": [],
+          "help": "The alternative text for this image",
+          "translatable": true
+        },
+        "large": {
+          "type":"string",
+          "required":true,
+          "default": "",
+          "inputType": "Asset:image",
+          "validators": ["required"],
+          "help": "The large sized image for desktop devices"
+        },
+        "small": {
+          "type":"string",
+          "required":true,
+          "default": "",
+          "inputType": "Asset:image",
+          "validators": ["required"],
+          "help": "The small sized image for mobile devices"
+        },
+        "attribution": {
+          "type":"string",
+          "required":false,
+          "default": "",
+          "inputType": "Text",
+          "validators": [],
+          "help": "Text to be displayed as an attribution",
+          "translatable": true
+        }
+      }
+    },
     "_notifyopt": {
       "type": "string",
       "required": true,
@@ -64,6 +106,13 @@
               "default": "Message goes here",
               "inputType": "Text",
               "help": "Message body text for the Popup Notify Window"
+            },
+            "copypaste": {
+              "type":"string",
+              "title": "Copy and Paste the link",
+              "default": "<a href='#' id='mypopup'>copied popup link</a>",
+              "inputType": "Text",
+              "help": "In the component body click the source button, then copy and paste the link below into it. You can use the tags provided or <button id='mypopup'>copied popup link</button>"
             }
           }
         }
@@ -101,6 +150,13 @@
               "default": "Continue",
               "inputType": "Text",
               "help": "Text displayed inside the confirmation button"
+            },
+            "copypaste": {
+              "type":"string",
+              "title": "Copy and Paste the link",
+              "default": "<a href='#' id='myalert'>copied alert link</a>",
+              "inputType": "Text",
+              "help": "In the component body click the source button, then copy and paste the link below into it. You can use the tags provided or <button id='myalert'>copied alert link</button>"
             }
           }
         }

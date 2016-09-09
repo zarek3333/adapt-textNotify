@@ -6,6 +6,10 @@
   "issues": "",
   "displayName" : "Text Notify",
   "component" : "textNotify",
+  "assetFields" : [
+    "_graphic.small",
+    "_graphic.large"
+  ],
   "description": "A text component which hijacks anchor tag clicks to show a notify",
   "main": "/js/adapt-contrib-textNotify.js",
   "keywords": [
