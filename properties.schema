@@ -75,12 +75,12 @@
     "_notifyopt": {
       "type": "string",
       "required": true,
-      "enum": ["popup", "alert"],
-      "inputType": {"type": "Select", "options": ["popup", "alert"]},
+      "enum": ["popup", "alert", "audio-is-on"],
+      "inputType": {"type": "Select", "options": ["popup", "alert", "audio-is-on"]},
       "title": "set if you want to use a popup window or an alert window",
       "default": "popup",
       "validators": ["required"],
-      "help": "choose a 'popup window' or 'alert window'"
+      "help": "choose a 'popup window' or 'alert window'. Also if audio extension is used it has a fix for it select 'audio-is-on'"
     },
     "_popupData": {
       "type":"object",
@@ -104,7 +104,7 @@
               "required":true,
               "title": "Message Body",
               "default": "Message goes here",
-              "inputType": "Text",
+              "inputType": "TextArea",
               "help": "Message body text for the Popup Notify Window"
             },
             "copypaste": {
@@ -140,7 +140,7 @@
               "required":true,
               "title": "Message Body",
               "default": "Message goes here",
-              "inputType": "Text",
+              "inputType": "TextArea",
               "help": "Message body text for the Alert Notify Window"
             },
             "confirmButton": {
