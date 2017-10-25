@@ -44,7 +44,10 @@ define(function(require) {
 
                 if (this._isVisibleTop && this._isVisibleBottom) {
                     this.$('.component-widget').off('inview');
-                    //this.setCompletionStatus(); TURN OFF COMPLETE ON INVIEW
+                    var mynotifyopt = this.model.get("_notifyopt");
+                    if (mynotifyopt === 'button') {
+                        this.setCompletionStatus();
+                    }
                 }
 
             }
@@ -104,8 +107,6 @@ define(function(require) {
                     Adapt.trigger;
                     this.setCompletionStatus();
                 }
-            } else if (notifyopt === 'button') {
-                    this.setCompletionStatus();
             }
         }
     });
