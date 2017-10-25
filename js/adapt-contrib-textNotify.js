@@ -105,11 +105,7 @@ define(function(require) {
                     this.setCompletionStatus();
                 }
             } else if (notifyopt === 'button') {
-                if(id) {
-                    event.preventDefault();
-                    Adapt.trigger;
                     this.setCompletionStatus();
-                }
             }
         }
     });
