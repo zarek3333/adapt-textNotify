@@ -44,7 +44,7 @@ define(function(require) {
 
                 if (this._isVisibleTop && this._isVisibleBottom) {
                     this.$('.component-widget').off('inview');
-                    this.setCompletionStatus();
+                    //this.setCompletionStatus(); TURN OFF COMPLETE ON INVIEW
                 }
 
             }
@@ -89,7 +89,8 @@ define(function(require) {
                         title: popupData.title,
                         body: popupData.message
                     });
-                    Adapt.trigger
+                    Adapt.trigger;
+                    this.setCompletionStatus();
                 }
             } else if (notifyopt === 'alert') {
                 if(id) {
@@ -100,7 +101,14 @@ define(function(require) {
                         body: alertData.message,
                         confirmText: alertData.confirmButton
                     });
-                    Adapt.trigger
+                    Adapt.trigger;
+                    this.setCompletionStatus();
+                }
+            } else if (notifyopt === 'button') {
+                if(id) {
+                    event.preventDefault();
+                    Adapt.trigger;
+                    this.setCompletionStatus();
                 }
             }
         }
