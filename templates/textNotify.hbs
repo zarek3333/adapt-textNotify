@@ -1,6 +1,6 @@
 <div class="graphic-inner component-inner" role="region" aria-label="{{_globals._components._graphic.ariaRegion}}">
     {{> component this}}
-    <button class="notifymybut {{_buttonData.button.block}}" style="display:none;" onclick="require('coreJS/adapt').trigger('notify:popup',{title:'{{_buttonData.button.title}}',body:'{{_buttonData.button.message}}'});return false;">{{_buttonData.button.copypaste}}</button>
+    <button class="notifymybut {{#if _buttonData}} {{_buttonData.button.classadd}} {{/if}}" style="display:none;" onclick="require('coreJS/adapt').trigger('notify:popup',{title:'{{_buttonData.button.title}}',body:'{{_buttonData.button.message}}'});return false;">{{_buttonData.button.copypaste}}</button>
     <div class="graphic-widget component-widget{{#if _graphic.attribution}} graphic-widget-attribution{{/if}}">
       <style>img[src=""] {display: none;}</style>
       <img src="{{_graphic.src}}" data-large="{{_graphic.large}}" data-small="{{_graphic.small}}"{{#if _graphic.alt}} aria-label="{{_graphic.alt}}" tabindex="0"{{else}} class="a11y-ignore" aria-hidden="true" tabindex="-1"{{/if}}/>
