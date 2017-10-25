@@ -171,6 +171,15 @@
           "type":"object",
           "title": "Button Launches Window Specs",
           "properties":{
+            "classadd": {
+              "type":"boolean",
+              "required":false,
+              "default": false,
+              "title": "Enable Show Button For Notify",
+              "inputType": "Checkbox",
+              "validators": [],
+              "help": "If not enabled the button for the notify component won't display on previewing the component."
+            },
             "title": {
               "type":"string",
               "required":true,
@@ -193,12 +202,6 @@
               "default": "Click Here",
               "inputType": "Text",
               "help": "This is the text that will display in your button."
-            },
-            "classadd": {
-              "type":"string",
-              "required":true,
-              "default": "notifyonbut",
-              "inputType": "Hidden"
             }
           }
         }
