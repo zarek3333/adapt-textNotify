@@ -17,8 +17,22 @@ define(function(require) {
             this.resizeImage(Adapt.device.screenSize, true);
 
             ComponentView.prototype.postRender.apply(this);
-            $('.component-body-inner a', this.$el).click(_.bind(this.onAnchorClicked, this));
-            $('.component-body-inner button', this.$el).click(_.bind(this.onAnchorClicked, this));
+
+            //REMOVED FROM ORIGINAL $('.textNotify-body-inner a', this.$el).click(_.bind(this.onAnchorClicked, this));
+            //REMOVED FROM ORIGINAL $('.textNotify-body-inner button', this.$el).click(_.bind(this.onAnchorClicked, this));
+
+        },
+
+        events: function() {
+                return Adapt.device.touch == true ? {
+                'inview':                       'inview',
+                'click .textNotify-body-inner #mypopup' :    'mynotifyPopup',
+                'click .textNotify-body-inner #myalert' :    'mynotifyAlert'
+            } : {
+                'inview':                       'inview',
+                'click .textNotify-body-inner #mypopup' :    'mynotifyPopup',
+                'click .textNotify-body-inner #myalert' :    'mynotifyAlert'
+            }
         },
 
         // Used to check if the graphic should reset on revisit
@@ -32,7 +46,9 @@ define(function(require) {
         },
 
         inview: function(event, visible, visiblePartX, visiblePartY) {
+
             if (visible) {
+
                 if (visiblePartY === 'top') {
                     this._isVisibleTop = true;
                 } else if (visiblePartY === 'bottom') {
@@ -44,6 +60,7 @@ define(function(require) {
 
                 if (this._isVisibleTop && this._isVisibleBottom) {
                     this.$('.component-widget').off('inview');
+
                     var mynotifyopt = this.model.get("_notifyopt");
                     if (mynotifyopt === 'button') {
                         this.setCompletionStatus();
@@ -54,14 +71,16 @@ define(function(require) {
         },
 
         remove: function() {
+
             // Remove any 'inview' listener attached.
             this.$('.component-widget').off('inview');
 
             ComponentView.prototype.remove.apply(this, arguments);
 
             // danger! will remove all events on '.component-body-inner a'
-            $('.component-body-inner a', this.$el).off( "click" );
-            $('.component-body-inner button', this.$el).off( "click" );
+            //REMOVED FROM ORIGINAL $('.textNotify-body-inner a', this.$el).off( "click" );
+            //REMOVED FROM ORIGINAL $('.textNotify-body-inner button', this.$el).off( "click" );
+            
         },
 
         resizeImage: function(width, setupInView) {
@@ -79,36 +98,72 @@ define(function(require) {
             }, this));
         },
 
-        onAnchorClicked: function(event) {
-            var id = $(event.currentTarget).attr("id");
-            var notifyopt = this.model.get("_notifyopt");
-            
-            if (notifyopt === 'popup') {
-                // only hijack anchors with id
-                if(id) {
-                    event.preventDefault();
-                    var popupData = this.model.get("_popupData")[id];
-                    Adapt.trigger('notify:popup', {
-                        title: popupData.title,
-                        body: popupData.message
-                    });
-                    Adapt.trigger;
-                    this.setCompletionStatus();
-                }
-            } else if (notifyopt === 'alert') {
-                if(id) {
-                    event.preventDefault();
-                    var alertData = this.model.get("_alertData")[id];
-                    Adapt.trigger('notify:alert', {
-                        title: alertData.title,
-                        body: alertData.message,
-                        confirmText: alertData.confirmButton
-                    });
-                    Adapt.trigger;
-                    this.setCompletionStatus();
-                }
-            }
+        mynotifyPopup: function (event) {
+            event.preventDefault();
+
+            this.model.set('_active', false);
+
+            var bodyText = this.model.get("_popupData").mypopup.message;
+            var titleText = this.model.get("_popupData").mypopup.title;
+
+            var popupObject = {
+                title: titleText,
+                body: bodyText
+            };
+
+            Adapt.trigger('notify:popup', popupObject);
+            this.setCompletionStatus();
+        },
+
+        mynotifyAlert: function (event) {
+            event.preventDefault();
+
+            this.model.set('_active', false);
+
+            var bodyText2 = this.model.get("_alertData").myalert.message;
+            var titleText2 = this.model.get("_alertData").myalert.title;
+            var confirmText2 = this.model.get("_alertData").myalert.confirmButton;
+
+            var alertObject = {
+                title: titleText2,
+                body: bodyText2,
+                confirmText: confirmText2
+            };
+
+            Adapt.trigger('notify:alert', alertObject);
+            this.setCompletionStatus();
         }
+        //REMOVED FROM ORIGINAL
+        // onAnchorClicked: function(event) {
+        //     var id = $(event.currentTarget).attr("id");
+        //     var notifyopt = this.model.get("_notifyopt");
+            
+        //     if (notifyopt === 'popup') {
+        //         // only hijack anchors with id
+        //         if(id) {
+        //             event.preventDefault();
+        //             var popupData = this.model.get("_popupData")[id];
+        //             Adapt.trigger('notify:popup', {
+        //                 title: popupData.title,
+        //                 body: popupData.message
+        //             });
+        //             Adapt.trigger;
+        //             this.setCompletionStatus();
+        //         }
+        //     } else if (notifyopt === 'alert') {
+        //         if(id) {
+        //             event.preventDefault();
+        //             var alertData = this.model.get("_alertData")[id];
+        //             Adapt.trigger('notify:alert', {
+        //                 title: alertData.title,
+        //                 body: alertData.message,
+        //                 confirmText: alertData.confirmButton
+        //             });
+        //             Adapt.trigger;
+        //             this.setCompletionStatus();
+        //         }
+        //     }
+        // }
     });
 
     Adapt.register('textNotify', TextNotify);
