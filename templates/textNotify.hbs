@@ -1,7 +1,7 @@
-<div class="graphic-inner component-inner inner-{{_id}}" role="region" aria-label="{{_globals._components._graphic.ariaRegion}}">
+<div class="graphic-inner component-inner" id="inner-{{_id}}" role="region" aria-label="{{_globals._components._graphic.ariaRegion}}">
     {{> component this}}
 
-    <button class="notifymybut {{#if _buttonData.button.classadd}} notifyonbut {{/if}}" id="{{_id}}" style="display:none;" onclick="require('coreJS/adapt').trigger('notify:popup',{title:'{{_buttonData.button.title}}',body:'{{_buttonData.button.message}}'});return false;">{{_buttonData.button.copypaste}}</button>
+    <button class="notifymybut {{#if _buttonData.button.classadd}} notifyonbut {{/if}}" id="mybutton" style="display:none;">{{_buttonData.button.copypaste}}</button>
 
     <div class="graphic-widget component-widget{{#if _graphic.attribution}} graphic-widget-attribution{{/if}}">
       <style>img[src=""] {display: none;}</style>
