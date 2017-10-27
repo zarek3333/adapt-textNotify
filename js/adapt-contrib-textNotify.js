@@ -18,20 +18,19 @@ define(function(require) {
 
             ComponentView.prototype.postRender.apply(this);
 
-            //REMOVED FROM ORIGINAL $('.textNotify-body-inner a', this.$el).click(_.bind(this.onAnchorClicked, this));
-            //REMOVED FROM ORIGINAL $('.textNotify-body-inner button', this.$el).click(_.bind(this.onAnchorClicked, this));
-
         },
 
         events: function() {
-                return Adapt.device.touch == true ? {
+            return Adapt.device.touch == true ? {
                 'inview':                       'inview',
-                'click .textNotify-body-inner #mypopup' :    'mynotifyPopup',
-                'click .textNotify-body-inner #myalert' :    'mynotifyAlert'
+                'click .textNotify-body-inner #mypopup' : 'mynotifyPopup',
+                'click .textNotify-body-inner #myalert' : 'mynotifyAlert',
+                'click .component-inner #mybutton' : 'mynotifyButton'
             } : {
                 'inview':                       'inview',
-                'click .textNotify-body-inner #mypopup' :    'mynotifyPopup',
-                'click .textNotify-body-inner #myalert' :    'mynotifyAlert'
+                'click .textNotify-body-inner #mypopup' : 'mynotifyPopup',
+                'click .textNotify-body-inner #myalert' : 'mynotifyAlert',
+                'click .component-inner #mybutton' : 'mynotifyButton'
             }
         },
 
@@ -60,11 +59,6 @@ define(function(require) {
 
                 if (this._isVisibleTop && this._isVisibleBottom) {
                     this.$('.component-widget').off('inview');
-
-                    var mynotifyopt = this.model.get("_notifyopt");
-                    if (mynotifyopt === 'button') {
-                        this.setCompletionStatus();
-                    }
                 }
 
             }
@@ -76,10 +70,6 @@ define(function(require) {
             this.$('.component-widget').off('inview');
 
             ComponentView.prototype.remove.apply(this, arguments);
-
-            // danger! will remove all events on '.component-body-inner a'
-            //REMOVED FROM ORIGINAL $('.textNotify-body-inner a', this.$el).off( "click" );
-            //REMOVED FROM ORIGINAL $('.textNotify-body-inner button', this.$el).off( "click" );
             
         },
 
@@ -132,38 +122,25 @@ define(function(require) {
 
             Adapt.trigger('notify:alert', alertObject);
             this.setCompletionStatus();
+        },
+
+        mynotifyButton: function (event) {
+            event.preventDefault();
+
+            this.model.set('_active', false);
+
+            var bodyText3 = this.model.get("_buttonData").button.message;
+            var titleText3 = this.model.get("_buttonData").button.title;
+
+            var buttonObject = {
+                title: titleText3,
+                body: bodyText3
+            };
+
+            Adapt.trigger('notify:popup', buttonObject);
+            this.setCompletionStatus();
         }
-        //REMOVED FROM ORIGINAL
-        // onAnchorClicked: function(event) {
-        //     var id = $(event.currentTarget).attr("id");
-        //     var notifyopt = this.model.get("_notifyopt");
-            
-        //     if (notifyopt === 'popup') {
-        //         // only hijack anchors with id
-        //         if(id) {
-        //             event.preventDefault();
-        //             var popupData = this.model.get("_popupData")[id];
-        //             Adapt.trigger('notify:popup', {
-        //                 title: popupData.title,
-        //                 body: popupData.message
-        //             });
-        //             Adapt.trigger;
-        //             this.setCompletionStatus();
-        //         }
-        //     } else if (notifyopt === 'alert') {
-        //         if(id) {
-        //             event.preventDefault();
-        //             var alertData = this.model.get("_alertData")[id];
-        //             Adapt.trigger('notify:alert', {
-        //                 title: alertData.title,
-        //                 body: alertData.message,
-        //                 confirmText: alertData.confirmButton
-        //             });
-        //             Adapt.trigger;
-        //             this.setCompletionStatus();
-        //         }
-        //     }
-        // }
+
     });
 
     Adapt.register('textNotify', TextNotify);
