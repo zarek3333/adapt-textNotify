@@ -169,7 +169,7 @@
       "properties":{
         "button": {
           "type":"object",
-          "title": "Button Launches Window Specs",
+          "title": "Button Launches Alert",
           "properties":{
             "classadd": {
               "type":"boolean",
@@ -179,6 +179,13 @@
               "inputType": "Checkbox",
               "validators": [],
               "help": "If not enabled the button for the notify component won't display on previewing the component."
+            },
+            "copypaste": {
+              "type":"string",
+              "title": "Alert Launch Button Name",
+              "default": "Click Here",
+              "inputType": "Text",
+              "help": "This is the text that will display in your button which will launch the alert."
             },
             "title": {
               "type":"string",
@@ -196,12 +203,13 @@
               "inputType": "TextArea",
               "help": "Message body text for the Popup Notify Window"
             },
-            "copypaste": {
+            "confirmButton": {
               "type":"string",
-              "title": "Button Name that users click on",
-              "default": "Click Here",
+              "required":true,
+              "title": "Confirm Button Text",
+              "default": "Continue",
               "inputType": "Text",
-              "help": "This is the text that will display in your button."
+              "help": "Text displayed inside the confirmation button"
             }
           }
         }
