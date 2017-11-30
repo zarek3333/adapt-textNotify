@@ -78,7 +78,7 @@
       "enum": ["popup", "alert", "button"],
       "inputType": {"type": "Select", "options": ["popup", "alert", "button"]},
       "title": "set if you want to use a popup window or an alert window",
-      "default": "popup",
+      "default": "button",
       "validators": ["required"],
       "help": "choose a 'popup window' or 'alert window'. Also if you would like a button instead of a link use 'button'"
     },
@@ -175,7 +175,7 @@
               "type":"boolean",
               "required":false,
               "default": false,
-              "title": "Enable Show Button For Notify",
+              "title": "Enables the Button to launch a notify alert",
               "inputType": "Checkbox",
               "validators": [],
               "help": "If not enabled the button for the notify component won't display on previewing the component."
