@@ -131,13 +131,15 @@ define(function(require) {
 
             var bodyText3 = this.model.get("_buttonData").button.message;
             var titleText3 = this.model.get("_buttonData").button.title;
+            var confirmText3 = this.model.get("_buttonData").button.confirmButton;
 
             var buttonObject = {
                 title: titleText3,
-                body: bodyText3
+                body: bodyText3,
+                confirmText: confirmText3
             };
 
-            Adapt.trigger('notify:popup', buttonObject);
+            Adapt.trigger('notify:alert', buttonObject);
             this.setCompletionStatus();
         }
 
