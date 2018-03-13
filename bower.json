@@ -1,7 +1,7 @@
 {
   "name": "adapt-contrib-textNotify",
   "version": "0.0.5",
-  "framework": "^2.0.0",
+  "framework": ">=2.0.9",
   "homepage": "",
   "issues": "",
   "displayName" : "Text Notify",
