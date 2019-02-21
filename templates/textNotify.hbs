@@ -11,5 +11,9 @@
     {{#if _graphic.attribution}}
       <div class="graphic-attribution">{{{_graphic.attribution}}}</div>
     {{/if}}
-
+    {{#if bottomText}}
+      <div class="textnotify-bottom-text" tabindex="0">
+        {{{bottomText}}}
+      </div>
+    {{/if}}
 </div>
