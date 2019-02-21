@@ -25,12 +25,16 @@ define(function(require) {
                 'inview':                       'inview',
                 'click .textNotify-body-inner #mypopup' : 'mynotifyPopup',
                 'click .textNotify-body-inner #myalert' : 'mynotifyAlert',
-                'click .component-inner #mybutton' : 'mynotifyButton'
+                'click .component-inner #mybutton' : 'mynotifyButton',
+                'click .textnotify-bottom-text #mypopup' : 'mynotifyPopup',
+                'click .textnotify-bottom-text #myalert' : 'mynotifyAlert'
             } : {
                 'inview':                       'inview',
                 'click .textNotify-body-inner #mypopup' : 'mynotifyPopup',
                 'click .textNotify-body-inner #myalert' : 'mynotifyAlert',
-                'click .component-inner #mybutton' : 'mynotifyButton'
+                'click .component-inner #mybutton' : 'mynotifyButton',
+                'click .textnotify-bottom-text #mypopup' : 'mynotifyPopup',
+                'click .textnotify-bottom-text #myalert' : 'mynotifyAlert'
             }
         },
 
