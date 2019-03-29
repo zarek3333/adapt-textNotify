@@ -25,16 +25,20 @@ define(function(require) {
                 'inview':                       'inview',
                 'click .textNotify-body-inner #mypopup' : 'mynotifyPopup',
                 'click .textNotify-body-inner #myalert' : 'mynotifyAlert',
+                'click .textNotify-body-inner #myexternalink' : 'myexternaLink',
                 'click .component-inner #mybutton' : 'mynotifyButton',
                 'click .textnotify-bottom-text #mypopup' : 'mynotifyPopup',
-                'click .textnotify-bottom-text #myalert' : 'mynotifyAlert'
+                'click .textnotify-bottom-text #myalert' : 'mynotifyAlert',
+                'click .textnotify-bottom-text #myexternalink' : 'myexternaLink'
             } : {
                 'inview':                       'inview',
                 'click .textNotify-body-inner #mypopup' : 'mynotifyPopup',
                 'click .textNotify-body-inner #myalert' : 'mynotifyAlert',
+                'click .textNotify-body-inner #myexternalink' : 'myexternaLink',
                 'click .component-inner #mybutton' : 'mynotifyButton',
                 'click .textnotify-bottom-text #mypopup' : 'mynotifyPopup',
-                'click .textnotify-bottom-text #myalert' : 'mynotifyAlert'
+                'click .textnotify-bottom-text #myalert' : 'mynotifyAlert',
+                'click .textnotify-bottom-text #myexternalink' : 'myexternaLink'
             }
         },
 
@@ -125,6 +129,13 @@ define(function(require) {
             };
 
             Adapt.trigger('notify:alert', alertObject);
+            this.setCompletionStatus();
+        },
+        
+        myexternaLink: function (event) {
+            event.preventDefault();
+
+            this.model.set('_active', false);
             this.setCompletionStatus();
         },
 
