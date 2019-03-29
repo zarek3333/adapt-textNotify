@@ -75,12 +75,12 @@
     "_notifyopt": {
       "type": "string",
       "required": true,
-      "enum": ["popup", "alert", "button"],
-      "inputType": {"type": "Select", "options": ["popup", "alert", "button"]},
+      "enum": ["popup", "alert", "button", "link"],
+      "inputType": {"type": "Select", "options": ["popup", "alert", "button", "link"]},
       "title": "set if you want to use a popup window or an alert window",
       "default": "button",
       "validators": ["required"],
-      "help": "choose a 'popup window' or 'alert window'. Also if you would like a button instead of a link use 'button'"
+      "help": "choose a 'popup window', 'alert window' or add a external link to be completed. Also if you would like a button instead of a link use 'button'"
     },
     "_popupData": {
       "type":"object",
@@ -112,7 +112,7 @@
               "title": "Copy and Paste the link",
               "default": "<a href='#' id='mypopup'>copied popup link</a>",
               "inputType": "Text",
-              "help": "In the component body click the source button, then copy and paste the link below into it. You can use the tags provided or <button id='mypopup'>copied popup link</button>"
+              "help": "In the component body or bottom text click the source button, then copy and paste the link below into it. You can use the tags provided or <button id='mypopup'>copied popup link</button>"
             }
           }
         }
@@ -156,7 +156,27 @@
               "title": "Copy and Paste the link",
               "default": "<a href='#' id='myalert'>copied alert link</a>",
               "inputType": "Text",
-              "help": "In the component body click the source button, then copy and paste the link below into it. You can use the tags provided or <button id='myalert'>copied alert link</button>"
+              "help": "In the component body or bottom text click the source button, then copy and paste the link below into it. You can use the tags provided or <button id='myalert'>copied alert link</button>"
+            }
+          }
+        }
+      }
+    },
+    "_externaLink": {
+      "type":"object",
+      "required":false,
+      "legend": "External Link for completion",
+      "properties":{
+        "": {
+          "type":"object",
+          "title": "Alert Window",
+          "properties":{
+            "copypaste": {
+              "type":"string",
+              "title": "Copy and Paste the link",
+              "default": "<a href='path_to_my_document_goes_here' id='myexternalink' target='_blank'>external link name</a>",
+              "inputType": "Text",
+              "help": "In the component body or bottom text click the source button, then copy and paste the link below into it. You can use the tags provided or <button id='myalert'>copied alert link</button>"
             }
           }
         }
