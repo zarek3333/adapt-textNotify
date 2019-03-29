@@ -174,7 +174,7 @@
             "copypaste": {
               "type":"string",
               "title": "Copy and Paste the link",
-              "default": "<a href='path_to_my_document_goes_here' id='myexternalink' target='_blank'>external link name</a>",
+              "default": "<a href='path_to_my_document_goes_here' id='myexternalink' onclick=\"window.open(this.href, '','resizable=yes,status=no,location=no,toolbar=no,menubar=no,fullscreen=no,scrollbars=yes,dependent=no,width=600,height=600'); return false;\">external link name</a>",
               "inputType": "Text",
               "help": "In the component body or bottom text click the source button, then copy and paste the link below into it. You can use the tags provided or <button id='myalert'>copied alert link</button>"
             }
