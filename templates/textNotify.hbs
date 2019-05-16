@@ -17,18 +17,18 @@
       </div>
     {{/if}}
     {{#if _buttonData}}
-        <div class="notifydetails" style="display:none;">Text Notify Button Title: {{_buttonData.button.title}}
-          <div class="notifydetails" style="display:none;">Text Notify Button Body: {{{_buttonData.button.message}}}</div>
+        <div class="notifydetails a11y-ignore" aria-hidden="true" tabindex="-1" style="display:none;">Text Notify Button Title: {{_buttonData.button.title}}
+          <div class="notifydetails a11y-ignore" aria-hidden="true" tabindex="-1" style="display:none;">Text Notify Button Body: {{{_buttonData.button.message}}}</div>
         </div>
     {{/if}}
     {{#if _alertData}}
-        <div class="notifydetails" style="display:none;">Text Notify Alert Title: {{_alertData.myalert.title}}
-          <div class="notifydetails" style="display:none;">Text Notify Alert Body: {{{_alertData.myalert.message}}}</div>
+        <div class="notifydetails a11y-ignore" aria-hidden="true" tabindex="-1" style="display:none;">Text Notify Alert Title: {{_alertData.myalert.title}}
+          <div class="notifydetails a11y-ignore" aria-hidden="true" tabindex="-1" style="display:none;">Text Notify Alert Body: {{{_alertData.myalert.message}}}</div>
         </div>
     {{/if}}
     {{#if _popupData}}
-        <div class="notifydetails" style="display:none;">Text Notify Popup Title: {{_popupData.mypopup.title}}
-          <div class="notifydetails" style="display:none;">Text Notify Popup Body: {{{_popupData.mypopup.message}}}</div>
+        <div class="notifydetails a11y-ignore" aria-hidden="true" tabindex="-1" style="display:none;">Text Notify Popup Title: {{_popupData.mypopup.title}}
+          <div class="notifydetails a11y-ignore" aria-hidden="true" tabindex="-1" style="display:none;">Text Notify Popup Body: {{{_popupData.mypopup.message}}}</div>
         </div>
     {{/if}}
 </div>
