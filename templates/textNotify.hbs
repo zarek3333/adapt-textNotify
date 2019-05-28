@@ -17,18 +17,22 @@
       </div>
     {{/if}}
     {{#if _buttonData}}
-        <div class="notifydetails a11y-ignore" aria-hidden="true" tabindex="-1" style="display:none;">Text Notify Button Title: {{_buttonData.button.title}}
-          <div class="notifydetails a11y-ignore" aria-hidden="true" tabindex="-1" style="display:none;">Text Notify Button Body: {{{_buttonData.button.message}}}</div>
+        <div class="{{_id}}-fbnotify a11y-ignore" aria-hidden="true" tabindex="-1" style="display:none;">********** [ TEXT NOTIFY BUTTON ITEM CONTENT ] **********</div>
+        <div class="{{_id}}-fbnotify a11y-ignore" aria-hidden="true" tabindex="-1" style="display:none;">[ Text Notify Button Title ] = {{_buttonData.button.title}}
+          <div class="{{_id}}-fbnotify a11y-ignore" aria-hidden="true" tabindex="-1" style="display:none;">[ Text Notify Button Body ] = {{{_buttonData.button.message}}}</div>
         </div>
     {{/if}}
     {{#if _alertData}}
-        <div class="notifydetails a11y-ignore" aria-hidden="true" tabindex="-1" style="display:none;">Text Notify Alert Title: {{_alertData.myalert.title}}
-          <div class="notifydetails a11y-ignore" aria-hidden="true" tabindex="-1" style="display:none;">Text Notify Alert Body: {{{_alertData.myalert.message}}}</div>
+        <div class="{{_id}}-fbnotify a11y-ignore" aria-hidden="true" tabindex="-1" style="display:none;">********** [ TEXT NOTIFY ALERT ITEM CONTENT ] **********</div>
+        <div class="{{_id}}-fbnotify a11y-ignore" aria-hidden="true" tabindex="-1" style="display:none;">[ Text Notify Alert Title ] = {{_alertData.myalert.title}}
+          <div class="{{_id}}-fbnotify a11y-ignore" aria-hidden="true" tabindex="-1" style="display:none;">[ Text Notify Alert Body ] = {{{_alertData.myalert.message}}}</div>
         </div>
     {{/if}}
     {{#if _popupData}}
-        <div class="notifydetails a11y-ignore" aria-hidden="true" tabindex="-1" style="display:none;">Text Notify Popup Title: {{_popupData.mypopup.title}}
-          <div class="notifydetails a11y-ignore" aria-hidden="true" tabindex="-1" style="display:none;">Text Notify Popup Body: {{{_popupData.mypopup.message}}}</div>
+        <div class="{{_id}}-fbnotify a11y-ignore" aria-hidden="true" tabindex="-1" style="display:none;">********** [ TEXT NOTIFY POPUP ITEM CONTENT ] **********</div>
+        <div class="{{_id}}-fbnotify a11y-ignore" aria-hidden="true" tabindex="-1" style="display:none;">[ Text Notify Popup Title ] = {{_popupData.mypopup.title}}
+          <div class="{{_id}}-fbnotify a11y-ignore" aria-hidden="true" tabindex="-1" style="display:none;">[ Text Notify Popup Body ] = {{{_popupData.mypopup.message}}}</div>
         </div>
     {{/if}}
 </div>
+<script class="{{_id}}-fbnotify">if ( !$('html').hasClass('pagesave2txt') ) { $( ".{{_id}}-fbnotify" ).remove(); }</script>
