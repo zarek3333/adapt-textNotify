@@ -1,7 +1,8 @@
-define(function(require) {
-    
-    var ComponentView = require('coreViews/componentView');
-    var Adapt = require('coreJS/adapt');
+define([
+    'core/js/models/componentModel', // add this
+    'core/js/views/componentView', // change these to use proper paths
+    'core/js/adapt'
+], function(ComponentModel, ComponentView, Adapt) {
 
     var TextNotify = ComponentView.extend({
 
@@ -23,19 +24,19 @@ define(function(require) {
         events: function() {
             return Adapt.device.touch == true ? {
                 'inview':                       'inview',
-                'click .textNotify-body-inner #mypopup' : 'mynotifyPopup',
-                'click .textNotify-body-inner #myalert' : 'mynotifyAlert',
-                'click .textNotify-body-inner #myexternalink' : 'myexternaLink',
-                'click .component-inner #mybutton' : 'mynotifyButton',
+                'click .textnotify__body-inner #mypopup' : 'mynotifyPopup',
+                'click .textnotify__body-inner #myalert' : 'mynotifyAlert',
+                'click .textnotify__body-inner #myexternalink' : 'myexternaLink',
+                'click .component__inner #mybutton' : 'mynotifyButton',
                 'click .textnotify-bottom-text #mypopup' : 'mynotifyPopup',
                 'click .textnotify-bottom-text #myalert' : 'mynotifyAlert',
                 'click .textnotify-bottom-text #myexternalink' : 'myexternaLink'
             } : {
                 'inview':                       'inview',
-                'click .textNotify-body-inner #mypopup' : 'mynotifyPopup',
-                'click .textNotify-body-inner #myalert' : 'mynotifyAlert',
-                'click .textNotify-body-inner #myexternalink' : 'myexternaLink',
-                'click .component-inner #mybutton' : 'mynotifyButton',
+                'click .textnotify__body-inner #mypopup' : 'mynotifyPopup',
+                'click .textnotify__body-inner #myalert' : 'mynotifyAlert',
+                'click .textnotify__body-inner #myexternalink' : 'myexternaLink',
+                'click .component__inner #mybutton' : 'mynotifyButton',
                 'click .textnotify-bottom-text #mypopup' : 'mynotifyPopup',
                 'click .textnotify-bottom-text #myalert' : 'mynotifyAlert',
                 'click .textnotify-bottom-text #myexternalink' : 'myexternaLink'
@@ -66,7 +67,7 @@ define(function(require) {
                 }
 
                 if (this._isVisibleTop && this._isVisibleBottom) {
-                    this.$('.component-widget').off('inview');
+                    this.$('.component__widget').off('inview');
                 }
 
             }
@@ -75,7 +76,7 @@ define(function(require) {
         remove: function() {
 
             // Remove any 'inview' listener attached.
-            this.$('.component-widget').off('inview');
+            this.$('.component__widget').off('inview');
 
             ComponentView.prototype.remove.apply(this, arguments);
             
@@ -84,14 +85,14 @@ define(function(require) {
         resizeImage: function(width, setupInView) {
             var imageWidth = width === 'medium' ? 'small' : width;
             var imageSrc = (this.model.get('_graphic')) ? this.model.get('_graphic')[imageWidth] : '';
-            this.$('.graphic-widget img').attr('src', imageSrc);
+            this.$('.graphic__widget img').attr('src', imageSrc);
 
-            this.$('.graphic-widget').imageready(_.bind(function() {
+            this.$('.graphic__widget').imageready(_.bind(function() {
                 this.setReadyStatus();
 
                 if (setupInView) {
                     // Bind 'inview' once the image is ready.
-                    this.$('.component-widget').on('inview', _.bind(this.inview, this));
+                    this.$('.component__widget').on('inview', _.bind(this.inview, this));
                 }
             }, this));
         },
@@ -101,16 +102,20 @@ define(function(require) {
 
             this.model.set('_active', false);
 
+            var getcurrentid = this.model.get('_id');
             var bodyText = this.model.get("_popupData").mypopup.message;
             var titleText = this.model.get("_popupData").mypopup.title;
 
             var popupObject = {
                 title: titleText,
-                body: bodyText
+                body: bodyText,
+                _classes: ' txtpopnotify'
             };
 
             Adapt.trigger('notify:popup', popupObject);
             this.setCompletionStatus();
+            $('.accessibility .' + getcurrentid + ' .textnotify__body-inner').removeAttr('tabindex');
+            $('.accessibility .' + getcurrentid + ' .textnotify__body-inner p').attr('tabindex','0');
         },
 
         mynotifyAlert: function (event) {
@@ -118,6 +123,7 @@ define(function(require) {
 
             this.model.set('_active', false);
 
+            var getcurrentid = this.model.get('_id');
             var bodyText2 = this.model.get("_alertData").myalert.message;
             var titleText2 = this.model.get("_alertData").myalert.title;
             var confirmText2 = this.model.get("_alertData").myalert.confirmButton;
@@ -125,18 +131,25 @@ define(function(require) {
             var alertObject = {
                 title: titleText2,
                 body: bodyText2,
-                confirmText: confirmText2
+                confirmText: confirmText2,
+                _classes: ' txtalertnotify'
             };
 
             Adapt.trigger('notify:alert', alertObject);
             this.setCompletionStatus();
+            $('.accessibility .' + getcurrentid + ' .textnotify__body-inner').removeAttr('tabindex');
+            $('.accessibility .' + getcurrentid + ' .textnotify__body-inner p').attr('tabindex','0');
         },
         
         myexternaLink: function (event) {
             event.preventDefault();
 
             this.model.set('_active', false);
+
+            var getcurrentid = this.model.get('_id');
             this.setCompletionStatus();
+            $('.accessibility .' + getcurrentid + ' .textnotify__body-inner').removeAttr('tabindex');
+            $('.accessibility .' + getcurrentid + ' .textnotify__body-inner p').attr('tabindex','0');
         },
 
         mynotifyButton: function (event) {
@@ -144,6 +157,7 @@ define(function(require) {
 
             this.model.set('_active', false);
 
+            var getcurrentid = this.model.get('_id');
             var bodyText3 = this.model.get("_buttonData").button.message;
             var titleText3 = this.model.get("_buttonData").button.title;
             var confirmText3 = this.model.get("_buttonData").button.confirmButton;
@@ -151,15 +165,23 @@ define(function(require) {
             var buttonObject = {
                 title: titleText3,
                 body: bodyText3,
-                confirmText: confirmText3
+                confirmText: confirmText3,
+                _classes: ' txtbutnotify'
             };
 
             Adapt.trigger('notify:alert', buttonObject);
             this.setCompletionStatus();
+            $('.accessibility .' + getcurrentid + ' .textnotify__body-inner').removeAttr('tabindex');
+            $('.accessibility .' + getcurrentid + ' .textnotify__body-inner p').attr('tabindex','0');
         }
 
     });
 
-    Adapt.register('textNotify', TextNotify);
+    //Adapt.register('textNotify', TextNotify);
+    Adapt.register('textNotify', {
+      model: ComponentModel.extend({}), // register the model, it should be an extension of ComponentModel, an empty extension is fine
+      view: TextNotify
+    });
+    
     return TextNotify;
 });

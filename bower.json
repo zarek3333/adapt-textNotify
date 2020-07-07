@@ -1,7 +1,7 @@
 {
   "name": "adapt-contrib-textNotify",
-  "version": "0.0.9",
-  "framework": ">=2.0.9",
+  "version": "5.0.9",
+  "framework": ">=5.0.0",
   "homepage": "",
   "issues": "",
   "displayName" : "Text Notify",
@@ -10,7 +10,7 @@
     "_graphic.small",
     "_graphic.large"
   ],
-  "description": "A text component which hijacks anchor tag clicks to show a notify",
+  "description": "A text component which hijacks anchor tag clicks to show a notify. For framework 4.0.",
   "main": "/js/adapt-contrib-textNotify.js",
   "keywords": [
     "adapt-plugin",
